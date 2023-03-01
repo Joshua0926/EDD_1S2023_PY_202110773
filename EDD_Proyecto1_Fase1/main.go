@@ -127,9 +127,10 @@ func (dll *DoublyLinkedList) ordenarPorCarnet() {
 ////////////////////////////////// PILA DE ACCIONES DE ADMIN /////////////////////////
 
 type StudentS struct {
-	name  string
-	id    int
-	grade float64
+	name     string
+	lastname string
+	id       int
+	password string
 }
 
 type NodeS struct {
@@ -382,6 +383,8 @@ func ReporteDeLista() {
 		os.Exit(1)
 	}
 }
+
+/////////////////////////////// Reporte JSON ////////////////////////////////////////
 
 /////////////////////////////// Usuarios y Login ///////////////////////////////////
 
