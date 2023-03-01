@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
@@ -386,6 +387,59 @@ func ReporteDeLista() {
 
 /////////////////////////////// Reporte JSON ////////////////////////////////////////
 
+type Alumnos struct {
+	Alumnos []alumno `json:"alumnos"`
+}
+
+type alumno struct {
+	Nombre       string `json:"nombre"`
+	Carnet       string `json:"carnet"`
+	Contraseña   string `json:"contraseña"`
+	Carpeta_raiz string `json:"carpeta_raiz"`
+}
+
+func (dll *DoublyLinkedList) ReporteJSON() error {
+	// Crear la estructura de datos para almacenar a los alumnos
+	alumnos := Alumnos{}
+
+	// Recorrer la lista enlazada y agregar cada alumno a la lista de la estructura de datos
+	currentNode := dll.Head
+	for currentNode != nil {
+		alumno := struct {
+			Nombre       string `json:"nombre"`
+			Carnet       string `json:"carnet"`
+			Contraseña   string `json:"contraseña"`
+			Carpeta_raiz string `json:"carpeta_raiz"`
+		}{
+			Nombre:       currentNode.Student.name + " " + currentNode.Student.lastName,
+			Carnet:       currentNode.Student.id,
+			Contraseña:   currentNode.Student.password,
+			Carpeta_raiz: "/",
+		}
+		alumnos.Alumnos = append(alumnos.Alumnos, alumno)
+		currentNode = currentNode.Next
+	}
+
+	// Escribir la cadena de texto en un archivo
+	f, err := os.Create("usuarios.json")
+	if err != nil {
+		fmt.Println("Error al crear archivo .json:", err)
+		return err
+	}
+	defer f.Close()
+
+	encoder := json.NewEncoder(f)
+	encoder.SetIndent("", "  ")
+	err = encoder.Encode(alumnos)
+	if err != nil {
+		fmt.Println("Error al escribir datos en archivo .json:", err)
+		return err
+	}
+	fmt.Println("Archivo .json generado exitosamente")
+
+	return nil
+}
+
 /////////////////////////////// Usuarios y Login ///////////////////////////////////
 
 type Admin struct {
@@ -513,6 +567,7 @@ func Administrador() {
 				SortStacks(listadepilas.stacks)
 				fmt.Println("Lista stack")
 				printListStack(&listadepilas)
+				list.ReporteJSON()
 				//fmt.Println(stackList)
 			} else {
 				fmt.Println("No hay estudiantes en el sistema")
