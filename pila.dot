@@ -1,0 +1,46 @@
+digraph cola {
+node [shape=record];
+rankdir=LR;
+cola [label="<f0> Se aceptó a Estudiante: Leonardo 2023-02-28 22:31:32 |<f1> Se rechazó a Estudiante: Ebany 2023-02-28 22:31:37 |<f2> Se aceptó a Estudiante: Diana 2023-02-28 22:31:40 |<f3> Se aceptó a Estudiante: Kevin 2023-02-28 22:32:02 |<f4> Se aceptó a Estudiante: Kevin 2023-02-28 22:32:04 |<f5> Se rechazó a Estudiante: Manolo 2023-02-28 22:32:05 |"];
+cola:f0 -> cola:f1;
+cola:f1 -> cola:f2;
+cola:f2 -> cola:f3;
+cola:f3 -> cola:f4;
+cola:f4 -> cola:f5;
+cola:f5 -> cola:f6;
+cola:f6 -> cola:f7;
+cola:f7 -> cola:f8;
+cola:f8 -> cola:f9;
+cola:f9 -> cola:f10;
+cola:f10 -> cola:f11;
+cola:f11 -> cola:f12;
+cola:f12 -> cola:f13;
+cola:f13 -> cola:f14;
+cola:f14 -> cola:f15;
+cola:f15 -> cola:f16;
+cola:f16 -> cola:f17;
+cola:f17 -> cola:f18;
+cola:f18 -> cola:f19;
+cola:f19 -> cola:f20;
+cola:f20 -> cola:f21;
+cola:f21 -> cola:f22;
+cola:f22 -> cola:f23;
+cola:f23 -> cola:f24;
+cola:f24 -> cola:f25;
+cola:f25 -> cola:f26;
+cola:f26 -> cola:f27;
+cola:f27 -> cola:f28;
+cola:f28 -> cola:f29;
+cola:f29 -> cola:f30;
+cola:f30 -> cola:f31;
+cola:f31 -> cola:f32;
+cola:f32 -> cola:f33;
+cola:f33 -> cola:f34;
+cola:f34 -> cola:f35;
+cola:f35 -> cola:f36;
+cola:f36 -> cola:f37;
+cola:f37 -> cola:f38;
+cola:f38 -> cola:f39;
+cola:f39 -> cola:f40;
+}
+

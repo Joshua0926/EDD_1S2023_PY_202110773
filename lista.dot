@@ -1,0 +1,38 @@
+digraph {
+rankdir=LR;
+node [shape=record];
+subgraph cluster_notas0 {
+node [shape=plaintext];
+label = "Bitacora";
+"201780044";
+"Sesión Iniciada: 2023-02-28 22:32:58";
+ }
+subgraph cluster_notas1 {
+node [shape=plaintext];
+label = "Bitacora";
+"201901801";
+ }
+subgraph cluster_notas2 {
+node [shape=plaintext];
+label = "Bitacora";
+"202000277";
+ }
+subgraph cluster_notas3 {
+node [shape=plaintext];
+label = "Bitacora";
+"202001053";
+ }
+estudiante1 [label="{Leonardo Martinez|<notas> |<siguiente> }"];
+estudiante2 [label="{Kevin Castaneda|<notas> |<siguiente> }"];
+estudiante3 [label="{Diana Berducido|<notas> |<siguiente> }"];
+estudiante4 [label="{Kevin Hernandez|<notas> |<siguiente> }"];
+estudiante1 -> estudiante2;
+estudiante2 -> estudiante3;
+estudiante3 -> estudiante4;
+estudiante4 -> estudiante5;
+estudiante1:notas -> 201780044;
+estudiante2:notas -> 201901801;
+estudiante3:notas -> 202000277;
+estudiante4:notas -> 202001053;
+}
+
