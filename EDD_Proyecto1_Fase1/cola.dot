@@ -1,0 +1,47 @@
+digraph cola {
+node [shape=record];
+rankdir=TB;
+cola [label="<f0> Manolo Ramirez 201503933 Manolo93 |<f1> Wendi Vicente 202106484 Wendi52 |<f2> Robin Buezo 201944994 Robin27 |<f3> Luis Moreira 202010770 Luis55 |<f4> Williams Constanza 199919737 Williams6 |<f5> Dennis Escobar 201700792 Dennis28 |<f6> Jim Melendez 200715321 Jim67 |<f7> Alma Manchame 201700907 Alma28 |<f8> Kevin Secaida 201602404 Kevin46 |<f9> Luis Pirir 9616453 Luis32 |<f10> Erick Chacon 201807169 Erick91 |<f11> Kevin Sotoj 201710130 Kevin80 |<f12> Alejandro Yac 201700315 Alejandro34 |<f13> Damaris Muralles 202100953 Damaris89 |<f14> Gladys Ajuchan 201807389 Gladys17 |<f15> Wilmer Vasquez 201800678 Wilmer27 |<f16> Angela Pinelo 202002536 Angela92 |<f17> Gerber Ordonez 202004060 Gerber30 |<f18> Jose Galdamez 202109732 Jose21 |<f19> William Ambrocio 201403669 William29 |<f20> Fredy Quijada 202004812 Fredy63 |<f21> Jose Boguerin 201544815 Jose50 |<f22> Denis Coronado 202101499 Denis78 |<f23> Bryan Ignacio 201602516 Bryan75 |<f24> Pablo Barahona 202109715 Pablo42 |<f25> Williams Constanza 199919737 Williams42 |<f26> Brian Garcia 201807351 Brian12 |<f27> Nataly Guzman 202001570 Nataly84 |<f28> Aldo Vasquez 202109754 Aldo65 |<f29> Maria Tebalan 202100265 Maria41 |<f30> Moises Conde 202000127 Moises18 |<f31> Jorge Zamora 202002591 Jorge33 |<f32> Javier Pablo 201944766 Javier99 |<f33> Erick Gonzalez 201900621 Erick81 |<f34> Christopher Monterroso 201902363 Christopher66 |<f35> Steven Mejia 202104160 Steven18 |<f36> Oscar Morales 201603028 Oscar59 |<f37> Luis Garcia 202010814 Luis39 |<f38> Helber Urias 201404028 Helber67 |<f39> Javier Matias 202000896 Javier47 |<f40> Hugo Rosal 8318054 Hugo30 |"];
+cola:f0 -> cola:f1;
+cola:f1 -> cola:f2;
+cola:f2 -> cola:f3;
+cola:f3 -> cola:f4;
+cola:f4 -> cola:f5;
+cola:f5 -> cola:f6;
+cola:f6 -> cola:f7;
+cola:f7 -> cola:f8;
+cola:f8 -> cola:f9;
+cola:f9 -> cola:f10;
+cola:f10 -> cola:f11;
+cola:f11 -> cola:f12;
+cola:f12 -> cola:f13;
+cola:f13 -> cola:f14;
+cola:f14 -> cola:f15;
+cola:f15 -> cola:f16;
+cola:f16 -> cola:f17;
+cola:f17 -> cola:f18;
+cola:f18 -> cola:f19;
+cola:f19 -> cola:f20;
+cola:f20 -> cola:f21;
+cola:f21 -> cola:f22;
+cola:f22 -> cola:f23;
+cola:f23 -> cola:f24;
+cola:f24 -> cola:f25;
+cola:f25 -> cola:f26;
+cola:f26 -> cola:f27;
+cola:f27 -> cola:f28;
+cola:f28 -> cola:f29;
+cola:f29 -> cola:f30;
+cola:f30 -> cola:f31;
+cola:f31 -> cola:f32;
+cola:f32 -> cola:f33;
+cola:f33 -> cola:f34;
+cola:f34 -> cola:f35;
+cola:f35 -> cola:f36;
+cola:f36 -> cola:f37;
+cola:f37 -> cola:f38;
+cola:f38 -> cola:f39;
+cola:f39 -> cola:f40;
+cola:f40 -> cola:f41;
+}
+

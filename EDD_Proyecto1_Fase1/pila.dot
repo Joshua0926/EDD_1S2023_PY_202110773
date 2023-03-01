@@ -1,7 +1,7 @@
 digraph cola {
 node [shape=record];
 rankdir=LR;
-cola [label="<f0> Se aceptó a Estudiante: Leonardo 2023-02-28 22:31:32 |<f1> Se rechazó a Estudiante: Ebany 2023-02-28 22:31:37 |<f2> Se aceptó a Estudiante: Diana 2023-02-28 22:31:40 |<f3> Se aceptó a Estudiante: Kevin 2023-02-28 22:32:02 |<f4> Se aceptó a Estudiante: Kevin 2023-02-28 22:32:04 |<f5> Se rechazó a Estudiante: Manolo 2023-02-28 22:32:05 |"];
+cola [label="<f0> Se aceptó a Estudiante: Leonardo 2023-02-28 22:44:32 |<f1> Se aceptó a Estudiante: Ebany 2023-02-28 22:44:34 |<f2> Se rechazó a Estudiante: Diana 2023-02-28 22:44:36 |<f3> Se aceptó a Estudiante: Kevin 2023-02-28 22:44:37 |<f4> Se aceptó a Estudiante: Kevin 2023-02-28 22:44:38 |"];
 cola:f0 -> cola:f1;
 cola:f1 -> cola:f2;
 cola:f2 -> cola:f3;
@@ -42,5 +42,6 @@ cola:f36 -> cola:f37;
 cola:f37 -> cola:f38;
 cola:f38 -> cola:f39;
 cola:f39 -> cola:f40;
+cola:f40 -> cola:f41;
 }
 
