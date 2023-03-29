@@ -1,0 +1,40 @@
+{
+  "alumnos": [
+    {
+      "nombre": "Ebany Larios",
+      "carnet": "201403877",
+      "contraseña": "qwerty12",
+      "carpeta_raiz": "/"
+    },
+    {
+      "nombre": "Leonardo Martinez",
+      "carnet": "201780044",
+      "contraseña": "leo123",
+      "carpeta_raiz": "/"
+    },
+    {
+      "nombre": "Kevin Castaneda",
+      "carnet": "201901801",
+      "contraseña": "Kevin3",
+      "carpeta_raiz": "/"
+    },
+    {
+      "nombre": "Diana Berducido",
+      "carnet": "202000277",
+      "contraseña": "Diana55",
+      "carpeta_raiz": "/"
+    },
+    {
+      "nombre": "Kevin Hernandez",
+      "carnet": "202001053",
+      "contraseña": "Kevin4",
+      "carpeta_raiz": "/"
+    },
+    {
+      "nombre": "Joshua Osorio",
+      "carnet": "202110773",
+      "contraseña": "123",
+      "carpeta_raiz": "/"
+    }
+  ]
+}
