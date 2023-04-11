@@ -55,17 +55,17 @@ function ShowFile(){
   }
 
   function SendPermission() {
-    // Obtener valores seleccionados en los elementos de formulario
-    let path = $("#path").val();
-    const permiso = document.getElementById("boton1").value;
-    const carnet = document.getElementById("boton2").value;
-    const archivo = document.getElementById("boton3").value;
-    console.log(permiso);
-    console.log(carnet);
-    console.log(archivo);
-
-    tree.insertFile(path, archivo, carnet, permiso)
-  //Agregar acción a realizar
+     // Obtener valores seleccionados en los elementos de formulario
+     let path = $("#path").val();
+     const permiso = document.getElementById("CBPermisos").value;
+     const carnet = document.getElementById("CBCarnet").value;
+     const archivo = document.getElementById("CBArchivo").value;
+     console.log(permiso);
+     console.log(carnet);
+     console.log(archivo);
+ 
+     tree.insertFile(path, archivo, carnet, permiso)
+   //Agregar acción a realizar
   }
 
 
