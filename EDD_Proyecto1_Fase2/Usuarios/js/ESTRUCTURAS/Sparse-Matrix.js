@@ -1,9 +1,9 @@
-// CLASE NODO
 class Mnode{
     constructor(x, y, value){
         this.x = x.toString();
         this.y = y.toString();
         this.value = value;
+        
 
         // APUNTADORES
         this.up = null;
@@ -17,11 +17,13 @@ class Mnode{
 // CLASE  MATRIZ DISPERSA
 class SparseMatrix{
 
+
+
     constructor(){
-        this.head =  new Mnode(-1, -1, "Inicio");
+        this.head =  new Mnode(-1, -1, "Carpeta");
     }
     
-    insert(x, y, value){
+    insertarMD(x, y, value){
         // CREAR CABECERAS DE LAS FILAS O EJE X
         this.#xHeaders(x);
         // CREAR CABECERAS DE LAS COLUMNAS O EJE Y
@@ -34,6 +36,16 @@ class SparseMatrix{
         this.#addY(node, y);
     }
 
+    graphMD(){
+        let code = "graph [nodesep=\"0.8\", ranksep=\"0.6\"]; \n";
+		code +="M0[ label = \""+this.head.value+"\" width = 1.5 shape = \"square\" group=\"0\"]; \n";
+        code += this.#headersGraph()
+        code += this.#nodesGraph()
+        //console.log(code)
+        return(code)
+    }
+
+    
     // REALIZAR LAS CABECERAS EN LAS FILAS O EJE X
     #xHeaders(x){
         const curr = new Mnode(-1,-1, x);
@@ -198,14 +210,7 @@ class SparseMatrix{
         }
     }
 
-    graph(){
-        let code = "graph [nodesep=\"0.8\", ranksep=\"0.6\"]; \n";
-		code +="M0[ label = \"Inicio\" width = 1.5 shape = \"square\" style = \"filled\" fillcolor =\"slateblue\" group=\"0\"]; \n";
-        code += this.#headersGraph()
-        code += this.#nodesGraph()
-        console.log(code)
-        return(code)
-    }
+    
     #headersGraph(){
         let conn = "M0 ->";
         let nodes = "";
@@ -213,12 +218,12 @@ class SparseMatrix{
         let temp = null;
         try { temp = this.head.right } catch (error) { temp = null; console.log("GRAPH"); }
         while(temp != null){
-            nodes += "Y" + temp.value + `[label="${temp.value}" width = 1.5 shape ="square" style="filled" fillcolor="skyblue3" group = ${temp.value} ];\n`
-            rank += "Y" + temp.value + ";";
+            nodes += '"' + temp.value +'"' + `[label="${temp.value}" width = 1.5 shape ="square" group = "${temp.value}" ];\n`
+            rank += '"' + temp.value+ '"' + ";";
             if(temp.right != null){
-                conn += "Y" + temp.value + "->";
+                conn += '"' + temp.value + '"' + "->";
             }else{
-                conn += "Y" + temp.value + `[dir="both"];\n`;
+                conn += '"' + temp.value + '"' + `[dir="both"];\n`;
             }
             temp = temp.right;
         }
@@ -226,11 +231,11 @@ class SparseMatrix{
         conn += 'M0 ->';
         try { temp = this.head.down } catch (error) { temp = null; console.log("GRAPH"); }
         while(temp != null){
-            nodes += "X" + temp.value + `[label="${temp.value}" width = 1.5 shape ="square" style="filled" fillcolor="skyblue3" group="0"];\n`
+            nodes += '"'+ temp.value+'"' + `[label="${temp.value}" width = 1.5 shape ="square" group="0"];\n`
             if(temp.down != null){
-                conn += "X" + temp.value + "->";
+                conn +=  '"'+ temp.value+'"' + "->";
             }else{
-                conn += "X" + temp.value + `[dir="both"];\n`;
+                conn +=  '"'+ temp.value + '"' + `[dir="both"];\n`;
             }
             temp = temp.down;
         }
@@ -238,7 +243,7 @@ class SparseMatrix{
         rank += "}";
         return nodes +"\n"+ conn +"\n"+ rank +"\n";
     }
-
+    
     #nodesGraph(){
         let conn = "";
         let nodes = "";
@@ -248,14 +253,14 @@ class SparseMatrix{
         let ty = null;
         while(tx != null){
             try { ty = tx.right } catch (error) { ty = null; console.log("errorX2"); } 
-            conn += `X${ty.x} -> `
+            conn += `"${ty.x}" -> `
             while(ty != null){
-                nodes += `S${ty.x}_${ty.y}[label="${ty.value}" width=1.5 shape="square" style="filled" fillcolor="slategray1" group="${ty.y}"];\n`
-                rank += `{rank=same; X${ty.x}; S${ty.x}_${ty.y};}\n`;
+                nodes += `"${ty.x}_${ty.y}"[label="${ty.value}" width=1.5 shape="square" group="${ty.y}"];\n`
+                rank += `{rank=same; "${ty.x}"; "${ty.x}_${ty.y}";}\n`;
                 if(ty.right != null){
-                    conn += `S${ty.x}_${ty.y} ->`;
+                    conn += `"${ty.x}_${ty.y}" ->`;
                 }else{
-                    conn += `S${ty.x}_${ty.y} [dir="both"]; \n`;
+                    conn += `"${ty.x}_${ty.y}" [dir="both"]; \n`;
                 }
                 ty = ty.right;
             }
@@ -266,18 +271,17 @@ class SparseMatrix{
         tx = null;
         while(ty != null){
             try { tx = ty.down } catch (error) { tx = null; console.log("errorX2"); } 
-            conn += `Y${tx.y} -> `
+            conn += `"${tx.y}" -> `
             while(tx != null){
                 if(tx.down != null){
-                    conn += `S${tx.x}_${tx.y} ->`;
+                    conn += `"${tx.x}_${tx.y}" ->`;
                 }else{
-                    conn += `S${tx.x}_${tx.y} [dir="both"]; \n`;
+                    conn += `"${tx.x}_${tx.y}" [dir="both"]; \n`;
                 }
                 tx = tx.down;
             }
             ty = ty.right;
         }
-
         return nodes + "\n" + rank + "\n" + conn;
     }
 }

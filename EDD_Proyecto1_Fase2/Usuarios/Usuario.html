@@ -22,13 +22,34 @@
     <div class="container text-light py-5">
         
         <h3>Bienvenido</h3>
+        <h3 id="NomUsu"></h3>
+        <script>
+            window.onload = function() {
+              var nombreEstudiante = sessionStorage.getItem('NomLogEst');
+             
+              var nombreUsuario = nombreEstudiante;
+              let titulo1 = document.getElementById("NomUsu");
+              titulo1.innerHTML = nombreUsuario;
+            };
+        </script>
         <button class="btn btn-primary w-30" onclick="logout()">Cerrar Sesión</button>
-   
+        
+
         
         <div class="row">
+            
             <div class="col-4 p-5">
+                <div class="SubirArchivo">
+                    <form class="form" onsubmit="Upload(event)">
+                        <input type="file" class="carga mt-3 "id="file" name="file" accept=".pdf,.txt,image/*">
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary w-100" id="CarArchivo">Cargar Archivo</button>
+                        </div>
+                    </form>
+        
+                </div>
                 <form class="form" onsubmit="CREATE(event)">
-                    <input type="text" id="folderName" name="folderName" class="form-control" placeholder="Nombre de Carpeta">
+                    <input type="text" id="folderName" name="folderName" class="form-control mt-3" placeholder="Nombre de Carpeta">
                     <div class="form-group mt-8">
                         <button type="submit" class="btn btn-primary w-100">      Crear Carpeta      </button>
                     </div>
@@ -36,8 +57,10 @@
                 <button class="btn btn-primary w-100" onclick="RENAME()">Modificar Carpeta</button>
                 <button class="btn btn-primary w-100" onclick="DELETE()">Eliminar Carpeta</button>
                 <a onclick="showGraph()" class="btn btn-primary w-100 mt-3">Reporte de carpetas</a>
-                <a onclick="showGraph()" class="btn btn-primary w-100 mt-3">Reporte de Archivos</a>
+                <a onclick="showGraphM()" class="btn btn-primary w-100 mt-3">Reporte de Archivos</a>
                 <a onclick="showGraphB()" class="btn btn-primary w-100 mt-3">Bitácora</a>
+
+
             </div>
             <div class="col-8 p-5">
                 <div class="row">
@@ -51,13 +74,39 @@
                     </div>
                 </div>
                 <div class="row mt-4" id="carpetas">
-                    <!-- MOSTRAR LAS CARPETAS -->
-                    <!-- <div class="col-2 folder" onclick="">
-                        <img src="./imgs/folder.png" width="100%"/>
-                        <p class="h6"> Nombre de Carpeta</p>
-                    </div> -->
+
                 </div>
             </div>
+        </div>
+        <div class="col-8 p-6">
+            <button id="Permisos" onclick="showOptions()">PERMISOS</button>
+            <label for="CBPermisos" id="label1" style="display:none">Permisos de lectura</label>
+            <select id="CBPermisos"  class="BotPER"  style="display:none">
+              <option value="boton3" selected></option>
+              <option value="R" >R</option>
+              <option value="R-W">R-W</option>
+            </select>
+            <label for="CBCarnet" id="label2" style="display:none">Carnet</label>
+            <select id="CBCarnet" class="BotPER" style="display:none">
+
+            </select>
+            
+            <script>
+                // Obtener los carnets almacenados en localStorage
+                var data = JSON.parse(localStorage.getItem("logEst")) || [];
+                var combobox = document.getElementById("CBCarnet");
+                data.forEach(function(item) {
+                  var option = document.createElement("option");
+                  option.value = item.carnet;
+                  option.text = item.carnet;
+                  combobox.appendChild(option);
+                });
+  
+              </script>
+              <label for="CBArchivo" id="label3" style="display:none">Archivo</label>
+              <select id="CBArchivo" class="BotPER" style="display:none"></select>
+              <button class="btnPer" id="BtnPer" onclick="SendPermission()" style="display:none">Aceptar</button>
+                </div>
         </div>
 
         <div class="ROW">
@@ -66,7 +115,7 @@
         </div>
         <div class="ROW">
             <h1>Reporte de Archivos</h1>
-            <img id="graph">
+            <img id="GraphMatix">
         </div>
         <div class="ROW">
             <h1>Bitácora</h1>
@@ -89,6 +138,7 @@
     crossorigin="anonymous"></script>
     <!-- Importar Estructuras -->
     <script src="./js/lib/cycle.js"></script>
+    <script src="./js/ESTRUCTURAS/Sparse-Matrix.js"></script>
     <script src="./js/ESTRUCTURAS/n-ary-tree.js"></script>
     <script src="./js/ESTRUCTURAS/BIT.js"></script>
     <!-- Importar Archivo Principal -->

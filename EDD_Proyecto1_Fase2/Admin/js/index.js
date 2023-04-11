@@ -1,10 +1,21 @@
 //--------------------------------------------------------------------------
 //                      DECLARACIÓN DE LAS ESTRUCTURAS A UTILIZAR
 //--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+//                      DECLARACIÓN DE LAS ESTRUCTURAS A UTILIZAR
+//--------------------------------------------------------------------------
 let avlTree = new AvlTree();
+
+
 //--------------------------------------------------------------------------
 //                      FUNCIÓN PARA MANEJAR FORMULARIOS
 //--------------------------------------------------------------------------
+function logout() {
+    window.location.href = "../Sesion/sesion.html";
+  }
+
+
+
 function loadStudentsForm(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -16,65 +27,119 @@ function loadStudentsForm(e) {
         fr.onload = () => {
             
             studentsArray = JSON.parse(fr.result).alumnos;
+                        // Crear el objeto usuarios
+
             //AGREGAR A LA TABLA LOS ALUMNOS CARGADOS 
             $('#studentsTable tbody').html(
-                studentsArray.map((item, index) => {
+                studentsArray.map((estudiante, index) => {
                     return(`
                         <tr>
-                            <th>${item.carnet}</th>
-                            <td>${item.nombre}</td>
-                            <td>${item.password}</td>
+                            <th>${estudiante.carnet}</th>
+                            <td>${estudiante.nombre}</td>
+                            <td>${estudiante.password}</td>
                         </tr>
                     `);
                 }).join('')
             )
             for(let i = 0; i < studentsArray.length; i++){
-                avlTree.insert(studentsArray[i]);
+                avlTree.insertar(studentsArray[i]);
+             
+                
             }
+           
             localStorage.setItem('logEst', JSON.stringify(studentsArray));
-            var logEst = localStorage.getItem('logEst');
-            if (logEst) {
-                var studentsArray = JSON.parse(logEst);
-                console.log(studentsArray);
-            }
+            var studentsData = localStorage.getItem('logEst');
+            if (studentsData) {
+            var studentsArray = JSON.parse(studentsData);
+            console.log(studentsArray);
+          }
             alert('Alumnos cargados con éxito!')
+         
         }
     }catch(error){
         console.log(error);
         alert("Error en la inserción");
     }
 }
-function logout() {
-    window.location.href = "../Sesion/sesion.html";
-  }
-  
 
 function loadDataFromLocalStorage() {
-    const logEst = localStorage.getItem('logEst');
-    if (logEst) {
-      const studentsArray = JSON.parse(logEst);
+    const studentsData = localStorage.getItem('logEst');
+    if (studentsData) {
+      const studentsArray = JSON.parse(studentsData);
       $('#studentsTable tbody').html(
-        studentsArray.map((item, index) => {
+        studentsArray.map((estudiante, index) => {
           return(`
             <tr>
-              <th>${item.carnet}</th>
-              <td>${item.nombre}</td>
-              <td>${item.password}</td>
+              <th>${estudiante.carnet}</th>
+              <td>${estudiante.nombre}</td>
+              <td>${estudiante.password}</td>
             </tr>
           `);
         }).join('')
       );
       for(let i = 0; i < studentsArray.length; i++){
-        avlTree.insert(studentsArray[i]);
+        avlTree.insertar(studentsArray[i]);
       }
     }
   }
+
+  function inOrder(){
+    let nodos = avlTree.recorrerNodosEnOrden();
   
-  window.onload = function() {
-    loadDataFromLocalStorage();
-  };
+    // Agregar cada estudiante en una fila de la tabla HTML
+    let tableBody = document.querySelector('#studentsTable tbody');
+    let row = "";
+    for (let i = 0; i < nodos.length; i++) {
+        let current = nodos[i];
+        row += `
+            <tr>
+                <th>${current.estudiante.carnet}</th>
+                <td>${current.estudiante.nombre}</td>
+                <td>${current.estudiante.password}</td>
+            </tr>
+        `;
+    }
+    tableBody.innerHTML = row;
+  }
 
 
+  function PostOrder(){
+    let nodos = avlTree.recorrerNodosPostOrden();
+  
+    // Agregar cada estudiante en una fila de la tabla HTML
+    let tableBody = document.querySelector('#studentsTable tbody');
+    let row = "";
+    for (let i = 0; i < nodos.length; i++) {
+        let current = nodos[i];
+        row += `
+            <tr>
+                <th>${current.estudiante.carnet}</th>
+                <td>${current.estudiante.nombre}</td>
+                <td>${current.estudiante.password}</td>
+            </tr>
+        `;
+    }
+    tableBody.innerHTML = row;
+  }
+
+  function PreOrder(){
+    let nodos = avlTree.recorrerNodosPreOrden();
+  
+    // Agregar cada estudiante en una fila de la tabla HTML
+    let tableBody = document.querySelector('#studentsTable tbody');
+    let row = "";
+    for (let i = 0; i < nodos.length; i++) {
+        let current = nodos[i];
+        row += `
+            <tr>
+                <th>${current.estudiante.carnet}</th>
+                <td>${current.estudiante.nombre}</td>
+                <td>${current.estudiante.password}</td>
+            </tr>
+        `;
+    }
+    tableBody.innerHTML = row;
+  }
 //--------------------------------------------------------------------------
 //                   FUNCIÓN PARA AGREGAR RECORRIDOS
 //--------------------------------------------------------------------------
@@ -85,19 +150,15 @@ function showStudentsForm(e){
     if(avlTree.root !== null){
         switch(form.traversal){
             case 'inOrder':
-                $('#studentsTable tbody').html(
-                    avlTree.inOrder()
-                )
+                inOrder();
                 break;
             case 'preOrder':
-                $('#studentsTable tbody').html(
-                    avlTree.preOrder()
-                )
+                
+                PreOrder();
+                
                 break;
             case 'postOrder':
-                $('#studentsTable tbody').html(
-                    avlTree.postOrder()
-                )
+                PostOrder();
                 break;
             default:
                 $('#studentsTable tbody').html("")
@@ -106,12 +167,19 @@ function showStudentsForm(e){
     }
 }
 
+
+
 //--------------------------------------------------------------------------
 //                   FUNCIÓN PARA MOSTRAR LA GRÁFICA
 //--------------------------------------------------------------------------
 function showAvlGraph(){
     let url = 'https://quickchart.io/graphviz?graph=';
-    let body = `digraph G { ${avlTree.treeGraph()} }`
+    let body = `digraph G { ${avlTree.generarDot()} }`
     console.log(body);
     $("#graph").attr("src", url + body);
 }
+
+
+window.onload = function() {
+    loadDataFromLocalStorage();
+  };

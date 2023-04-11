@@ -3,6 +3,8 @@ class Tnode{
         this.folderName = folderName;
         this.children = []; // TODOS LOS NODOS HIJOS
         this.id = null; // PARA GENERAR LA GRÁFICA
+        this.files = [];
+        this.matriz = new SparseMatrix();
     }
 }
 
@@ -71,15 +73,25 @@ class Tree{
     }
 
     getHTML(path){
-        let node = this.getFolder(path);
-        let code = "";
-        node.children.map(child => {
-            code += ` <div class="folder" onclick="entrarCarpeta('${child.folderName}')">
-                        <img src="./imgs/folder.png" width="100%"/>
-                        <p class="TextCarpeta">${child.folderName}</p>
-                    </div>`
-        })
-        return code;
+        
+            let node = this.getFolder(path);
+            let code = "";
+            node.children.map((child) => {
+              code += ` <div class="col-2 folder" onclick="entrarCarpeta('${child.folderName}')">
+                              <img src="./imgs/folder.png" width="100%"/>
+                              <p class="h6 text-center">${child.folderName}</p>
+                          </div>`;
+            });
+            node.files.map((file) => {
+              code += `<div class="col-2 folder">
+                            <a href="${file.content}" download="${file.name}" class="link-like">
+                              <img src="./imgs/google-docs.png" id="ImagenArchivo" width="20%"/>
+                              <p class="h6 text-center">${file.name}</p>
+                            </a>
+                          </div>`;
+            });
+            return code;
+          
     }
     search(path) {
         let node = this.getFolder(path);
@@ -117,6 +129,19 @@ class Tree{
           console.log('La carpeta no existe');
         }
       }
+
+
+
+     insertFile(path, fileName, content, type){
+         let temp = this.getFolder(path);
+         temp.matriz.insertarMD(fileName, content, type);
+     }    
+
+     matrixGrpah(path){
+         let temp = this.getFolder(path);
+         console.log(temp.matriz);
+         return temp.matriz.graphMD();
+     }
 
 
 }

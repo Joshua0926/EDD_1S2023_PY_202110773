@@ -1,202 +1,168 @@
-//--------------------------------------------------------------------------
-//                      CLASE NODO
-//--------------------------------------------------------------------------
-class AvlNode{
-    constructor(item){
-        this.item = item;
-        this.left = null;
-        this.right = null;
-        this.height = 0;
+class Nodo {
+    constructor(estudiante) {
+        this.estudiante = estudiante;
+        this.izquierda = undefined;
+        this.derecha = undefined;
+        this.altura = 1;
     }
 }
 
 //--------------------------------------------------------------------------
 //                   VARIABLES GLOBALES
 //--------------------------------------------------------------------------
-let nodes = "";
-let connections = "";
 
 //--------------------------------------------------------------------------
 //                   CLASE ARBOL AVL
 //--------------------------------------------------------------------------
 class AvlTree{
     constructor(){
-        this.root = null;
+        this.raiz = null;
+    }
+    // Función para obtener la altura de un nodo
+    altura(nodo) {
+        return nodo ? nodo.altura : 0;
     }
 
-    insert(item){
-        this.root = this.#insertRecursive(item, this.root);
+    // Función para obtener el factor de balance de un nodo
+    factorBalance(nodo) {
+        return this.altura(nodo.izquierda) - this.altura(nodo.derecha);
     }
 
-    getHeight(node){
-        return node === null ? -1 : node.height;
-    }
-    getMaxHeight(leftNode, rightNode){
-        return leftNode.height > rightNode.height ? leftNode.height : rightNode.height;
+    // Función para rotar a la izquierda en el árbol AVL
+    rotarIzquierda(nodo) {
+        let nodoDerecha = nodo.derecha;
+        nodo.derecha = nodoDerecha.izquierda;
+        nodoDerecha.izquierda = nodo;
+        nodo.altura = Math.max(this.altura(nodo.izquierda), this.altura(nodo.derecha)) + 1;
+        nodoDerecha.altura = Math.max(this.altura(nodoDerecha.izquierda), this.altura(nodoDerecha.derecha)) + 1;
+        return nodoDerecha;
     }
 
-    //--------------------------------------------------------------------------
-    //                  METODO DE INSERCIÓN
-    //--------------------------------------------------------------------------
-    #insertRecursive(item, node){
-        if(node == null){
-            node = new AvlNode(item);
-        }else if(item.carnet < node.item.carnet){
-            node.left = this.#insertRecursive(item, node.left);
-            if(this.getHeight(node.left) - this.getHeight(node.right) == 1000){
-                if(item.carnet < node.left.item.carnet){
-                    node = this.#rotateLeft(node);
-                }else{
-                    node = this.#doubleLeft(node);
-                }
+    // Función para rotar a la derecha en el árbol AVL
+    rotarDerecha(nodo) {
+        let nodoIzquierda = nodo.izquierda;
+        nodo.izquierda = nodoIzquierda.derecha;
+        nodoIzquierda.derecha = nodo;
+        nodo.altura = Math.max(this.altura(nodo.izquierda), this.altura(nodo.derecha)) + 1;
+        nodoIzquierda.altura = Math.max(this.altura(nodoIzquierda.izquierda), this.altura(nodoIzquierda.derecha)) + 1;
+        return nodoIzquierda;
+    }
+
+    // Función para balancear un nodo en el árbol AVL
+    balancear(nodo) {
+        let factorBalance = this.factorBalance(nodo);
+        if (factorBalance > 1) {
+            if (this.factorBalance(nodo.izquierda) < 0) {
+                nodo.izquierda = this.rotarIzquierda(nodo.izquierda);
             }
-        }else if(item.carnet > node.item.carnet){
-            node.right = this.#insertRecursive(item, node.right);
-            if(this.getHeight(node.right) - this.getHeight(node.left) == 1000){
-                if(item.carnet > node.right.item.carnet){
-                    node = this.#rotateRight(node);
-                }else{
-                    node = this.#doubleRight(node);
-                }
+            return this.rotarDerecha(nodo);
+        } else if (factorBalance < -1) {
+            if (this.factorBalance(nodo.derecha) > 0) {
+                nodo.derecha = this.rotarDerecha(nodo.derecha);
             }
+            return this.rotarIzquierda(nodo);
+        } else {
+            return nodo;
+        }
+    }
+
+    insertar(estudiante) {
+        let nuevoNodo = new Nodo(estudiante);
+        this.raiz = this.insertarNodo(this.raiz, nuevoNodo);
+    }
+
+    // Función auxiliar para insertar un nodo en el árbol AVL
+    insertarNodo(nodo, nuevoNodo) {
+        if (!nodo) {
+            return nuevoNodo;
+        }
+        if (nuevoNodo.estudiante.carnet < nodo.estudiante.carnet) {
+            nodo.izquierda = this.insertarNodo(nodo.izquierda, nuevoNodo);
+        } else if (nuevoNodo.estudiante.carnet > nodo.estudiante.carnet) {
+            nodo.derecha = this.insertarNodo(nodo.derecha, nuevoNodo);
+        } else {
+            // Si el carnet ya existe, no se inserta el nuevo nodo
+            return nodo;
+        }
+        nodo.altura = Math.max(this.altura(nodo.izquierda), this.altura(nodo.derecha)) + 1;
+        return this.balancear(nodo);
+    }
+
+
+    // Función para recorrer los nodos del árbol AVL en orden ascendente por el carnet del estudiante
+    recorrerNodosEnOrden() {
+        let nodos = [];
+        this.recorrerEnOrden(this.raiz, nodos);
+        return nodos;
+    }
+
+    // Función auxiliar para recorrer los nodos del árbol AVL en orden ascendente
+    recorrerEnOrden(nodo, nodos) {
+        if (nodo) {
+            this.recorrerEnOrden(nodo.izquierda, nodos);
+            nodos.push(nodo);
+            this.recorrerEnOrden(nodo.derecha, nodos);
+        }
+    }
+
+    recorrerNodosPostOrden() {
+        let nodos = [];
+        this.recorrerPostOrder(this.raiz, nodos);
+        return nodos;
+    }
+
+    recorrerPostOrder(nodo, nodos) {
+        if (nodo) {
+            this.recorrerPostOrder(nodo.izquierda, nodos);
+            this.recorrerPostOrder(nodo.derecha, nodos);
+            nodos.push(nodo);
+        }
+    }
+
+    recorrerNodosPreOrden() {
+        let nodos = [];
+        this.recorrerPreOrder(this.raiz, nodos);
+        return nodos;
+    }
+
+    recorrerPreOrder(nodo, nodos) {
+        if (nodo) {
+            nodos.push(nodo);
+            this.recorrerPreOrder(nodo.izquierda, nodos);
+            this.recorrerPreOrder(nodo.derecha, nodos);
+        }
+    }
+
+    obtenerId() {
+        return "id" + Math.random().toString(16).slice(2);
+    }
+
+    generarDot() {
+        return this.recorrerEnOrdenDot(this.raiz, this.obtenerId());
+    }
+
+    // Función auxiliar para recorrer los nodos del árbol AVL en orden ascendente
+    recorrerEnOrdenDot(nodo, name) {
+        if (nodo) {
+
+            let value = ' Nodo' + name + '  [label = \"' + nodo.estudiante.carnet +'\\n'+nodo.estudiante.nombre+ '\\n' + 'Altura: '+  nodo.altura + ' \"]';
+
+            let nombreIzquierda = this.obtenerId();
+            let dotIzquierda = this.recorrerEnOrdenDot(nodo.izquierda, nombreIzquierda);
+            if (dotIzquierda) {
+                value += dotIzquierda + ' Nodo' + name + ' -> ' + 'Nodo' + nombreIzquierda;
+            }
+
+            let nombreDerecha = this.obtenerId();
+            let dotDerecha = this.recorrerEnOrdenDot(nodo.derecha, nombreDerecha);
+            if (dotDerecha) {
+                value += dotDerecha + ' Nodo' + name + ' -> ' + 'Nodo' + nombreDerecha;
+            }
+
+            return value
         }else{
-            swal("El estudiante ya fue cargado");
-        }
-        node.height = Math.max(this.getHeight(node.left), this.getHeight(node.right)) + 1;
-        return node;
-    }
-    
-    
-    
-
-    //--------------------------------------------------------------------------
-    //                   ROTACIONES
-    //--------------------------------------------------------------------------
-    #rotateRight(node1){
-        node2 = node1.right;
-        node1.right = node2.left;
-        node2.left = node1;
-        node1.height = this.getMaxHeight(this.getHeight(node1.left), this.getHeight(node1.right)) + 1;
-        node2.height = this.getMaxHeight(this.getHeight(node2.right), node1.height) + 1;
-        return node2;
-    }
-    #rotateLeft(node2){
-        node1 = node2.left;
-        node2.left = node1.right;
-        node1.right = node2;
-        node2.height = this.getMaxHeight(this.getHeight(node2.left), this.getHeight(node2.right)) + 1;
-        node1.height = this.getMaxHeight(this.getHeight(node1.left), node2.height) + 1;
-        return node1;
-    }
-    #doubleLeft(node){
-        node.left = this.#rotateRight(node.left);
-        return this.#rotateLeft(node);
-    }
-    #doubleRight(node){
-        node.right = this.#rotateLeft(node.right);
-        return this.#rotateRight(node);
-    }
-
-    //--------------------------------------------------------------------------
-    //                  REPORTE DEL ARBOL
-    //--------------------------------------------------------------------------
-    treeGraph() {       
-        nodes = "";
-        connections = "";
-        this.#treeGraphRecursive(this.root);
-        console.log(nodes,connections);
-        return nodes + connections;
-    }
-
-    #treeGraphRecursive(current){
-        if (current == null) {
-            return;
-        }
-        if(current.left != null){
-            this.#treeGraphRecursive(current.left);
-            connections += `S_${current.item.carnet} -> S_${current.left.item.carnet};\n`;
-        }
-        nodes += `S_${current.item.carnet}[label="${current.item.nombre}\\n${current.item.carnet}\\nAltura:${current.height}"];\n`;
-        if(current.right != null){
-            this.#treeGraphRecursive(current.right);
-            connections += `S_${current.item.carnet} -> S_${current.right.item.carnet};\n`;
+            return undefined;
         }
     }
-    
-    
-    //--------------------------------------------------------------------------
-    //                  RECORRIDO IN ORDER
-    //--------------------------------------------------------------------------
-    inOrder(){
-        let html = this.#inOrderRecursive(this.root);
-        return html;
-    }
-    #inOrderRecursive(current){
-        let row = "";
-        if(current.left != null){
-            row += this.#inOrderRecursive(current.left);
-        }
-        row +=`
-            <tr>
-                <th>${current.item.carnet}</th>
-                <td>${current.item.nombre}</td>
-                <td>${current.item.password}</td>
-            </tr>
-        `;
-        if(current.right != null){
-            row += this.#inOrderRecursive(current.right);
-        }
-        return row;
-    }
-    //--------------------------------------------------------------------------
-    //                  RECORRIDO PRE ORDER
-    //--------------------------------------------------------------------------
-    preOrder(){
-        let html = this.#preOrderRecursive(this.root);
-        return html;
-    }
-    #preOrderRecursive(current){
-        let row = "";
-        row +=`
-            <tr>
-                <th>${current.item.carnet}</th>
-                <td>${current.item.nombre}</td>
-                <td>${current.item.password}</td>
-            </tr>
-        `;
-        if(current.left != null){
-            row += this.#inOrderRecursive(current.left);
-        }
-        if(current.right != null){
-            row += this.#inOrderRecursive(current.right);
-        }
-        return row;
-    }
-
-    //--------------------------------------------------------------------------
-    //                  RECORRIDO POST ORDER
-    //--------------------------------------------------------------------------
-    postOrder(){
-        let html = this.#postOrderRecursive(this.root);
-        return html;
-    }
-    #postOrderRecursive(current){
-        let row = "";
-        if(current.left != null){
-            row += this.#inOrderRecursive(current.left);
-        }
-        if(current.right != null){
-            row += this.#inOrderRecursive(current.right);
-        }
-        row +=`
-            <tr>
-                <th>${current.item.carnet}</th>
-                <td>${current.item.nombre}</td>
-                <td>${current.item.password}</td>
-            </tr>
-        `;
-        return row;
-    }
-
 
 }

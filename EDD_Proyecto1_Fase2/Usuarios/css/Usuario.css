@@ -31,6 +31,72 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     border-radius: 10px;
 }
+#Permisos{
+    margin-top: 1rem;
+    background-color: #83a0b1;
+    color: #000000;
+    align-self: flex-end;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;}
+#Permisos:hover{
+    background-color: #000000;
+    color: #83a0b1;
+}
+#CBPermisos{
+    margin-top: 1rem;
+    background-color: #83a0b1;
+    color: #000000;
+    align-self: flex-end;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+}
+#CBPermisos:hover{
+    background-color: #000000;
+    color: #83a0b1;
+}
+#CBCarnet{
+    margin-top: 1rem;
+    background-color: #83a0b1;
+    color: #000000;
+    align-self: flex-end;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+}
+#CBCarnet:hover{
+    background-color: #000000;
+    color: #83a0b1;
+}
+#CBArchivo{
+    margin-top: 1rem;
+    background-color: #83a0b1;
+    color: #000000;
+    align-self: flex-end;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+}
+#CBArchivo:hover{
+    background-color: #000000;
+    color: #83a0b1;
+}
+#BtnPer{
+    margin-top: 1rem;
+    background-color: #83a0b1;
+    color: #000000;
+    align-self: flex-end;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+}
+
+
 
 .btn-buscar {
     background-color: #83a0b1;
@@ -56,6 +122,14 @@ h1, h2, h3, h4, h5, h6 {
 #carpetas {
     margin-top: 2rem;
 }
+
+#ImagenArchivo{
+    width: 75%;
+    max-width: 40px;
+    margin-left: 15px;
+   
+}
+
 
 .folder {
     display: flex;

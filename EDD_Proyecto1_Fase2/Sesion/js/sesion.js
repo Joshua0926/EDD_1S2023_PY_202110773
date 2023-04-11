@@ -1,3 +1,5 @@
+
+
 function login() {
     var username = document.getElementById("login-username").value;
     var password = document.getElementById("login-password").value;
@@ -16,7 +18,7 @@ function login() {
                     //window.location.href = "../DashboardUser/users.html";
                     window.location.href = "../Usuarios/Usuario.html";
                     sesEst=studentsArray[j].nombre;
-                    sessionStorage.setItem('nombreEstudiante', sesEst);
+                    sessionStorage.setItem('NomLogEst', sesEst);
                     return;
                 }
             }
