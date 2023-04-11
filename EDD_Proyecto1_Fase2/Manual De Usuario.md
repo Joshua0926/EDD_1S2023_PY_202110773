@@ -15,7 +15,7 @@ Este software proporciona un espacio para el almacenamiento de archivos, permiti
  
 Para acceder al sistema, es necesario iniciar sesión en la pantalla de login. Al principio, solo se puede acceder como administrador, y para esto será necesario tomar en cuenta que la contraseña y el nombre de usuario es “admin”. Después de la carga masiva de información de otros usuarios, ellos también pueden acceder. 
 
-![Arquitectura](https://gitlab.com/Joshua0926/ace1-231s0778a202110773prac4/-/blob/main/imagenes/variables.PNG)
+![Arquitectura](https://github.com/Joshua0926/EDD_1S2023_PY_202110773/blob/main/EDD_Proyecto1_Fase2/loginedd.PNG)
 
 Este sitio web tiene dos modos de uso, según el cargo del usuario: administrador o usuario. 
 
