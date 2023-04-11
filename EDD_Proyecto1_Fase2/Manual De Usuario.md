@@ -25,15 +25,15 @@ Después de iniciar sesión como administrador, se muestra una pantalla con las 
 
 En la sección de "subir estudiantes" se encuentra el botón "seleccionar archivo", que permite subir un archivo JSON con la información de los estudiantes y sus contraseñas para usar en el login. 
 
-![Arquitectura](https://gitlab.com/Joshua0926/ace1-231s0778a202110773prac4/-/blob/main/imagenes/subrutina.PNG)
+![Arquitectura](https://github.com/Joshua0926/EDD_1S2023_PY_202110773/blob/main/EDD_Proyecto1_Fase2/dashboard.PNG)
 
 El combobox "seleccionar recorrido" permite ordenar la tabla según el parámetro deseado. 
 
-![Arquitectura](https://gitlab.com/Joshua0926/ace1-231s0778a202110773prac4/-/blob/main/imagenes/subrutina.PNG)
+![Arquitectura](https://github.com/Joshua0926/EDD_1S2023_PY_202110773/blob/main/EDD_Proyecto1_Fase2/combobox.PNG)
 
 El botón "graficar el Árbol" muestra el árbol de los estudiantes cargados. 
 
-![Arquitectura](https://gitlab.com/Joshua0926/ace1-231s0778a202110773prac4/-/blob/main/imagenes/subrutina.PNG)
+![Arquitectura](https://github.com/Joshua0926/EDD_1S2023_PY_202110773/blob/main/EDD_Proyecto1_Fase2/graficar.PNG)
 
 ## Usuario: 
 
@@ -42,7 +42,7 @@ Las funciones disponibles para los usuarios son:
 
 Crear carpetas: para crear una carpeta, seleccione un nombre en el combobox y presione el botón "crear". La carpeta se muestra en el cuadro de la derecha.
 
-![Arquitectura](https://gitlab.com/Joshua0926/ace1-231s0778a202110773prac4/-/blob/main/imagenes/subrutina.PNG)
+![Arquitectura](https://github.com/Joshua0926/EDD_1S2023_PY_202110773/blob/main/EDD_Proyecto1_Fase2/carpetas.PNG)
 
 
 Modificar y eliminar carpetas: para realizar estas acciones, es necesario situarse dentro de la carpeta. 
@@ -55,4 +55,4 @@ Permisos: seleccione el botón "mostrar botones" para ver las opciones disponibl
 
 Los botones de reportes permiten mostrar los árboles y la matriz que indica la información de todo lo que el usuario ha realizado, demostrando los procesos necesarios para realizar dichas acciones. 
 
-![Arquitectura](https://gitlab.com/Joshua0926/ace1-231s0778a202110773prac4/-/blob/main/imagenes/subrutina.PNG)
+![Arquitectura](https://github.com/Joshua0926/EDD_1S2023_PY_202110773/blob/main/EDD_Proyecto1_Fase2/reportes.PNG)
