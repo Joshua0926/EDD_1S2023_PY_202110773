@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="css/diseño.css">
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="logo">Inicio de Sesión</div>
+        <div class="login-item">
+          <form method="post" class="form form-login">
+            <div class="form-field">
+              <label class="user" for="login-username"><span class="hidden">Carnet</span></label>
+              <input id="login-username" type="text" class="form-input" placeholder="Carnet" required>
+            </div>
+    
+            <div class="form-field">
+              <label class="lock" for="login-password"><span class="hidden">Password</span></label>
+              <input id="login-password" type="password" class="form-input" placeholder="Password" required>
+            </div>
+    
+            <div class="form-field">
+                <input type="submit" value="Log in" onclick="login(); return false;">
+            </div>
+          </form>
+        </div>
+    </div>
+
+<script src="js/sesion.js"></script>
+</body>
+</html>
