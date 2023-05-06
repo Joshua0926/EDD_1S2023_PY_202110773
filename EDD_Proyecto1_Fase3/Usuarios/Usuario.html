@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/Usuario.css">
+</head>
+<body class="bg-dark">
+    <style>
+        .folder:hover{
+            background-color: cornsilk;
+            color: rgb(33,37,41);
+            transform: .3s;
+            cursor: pointer;
+        }
+    </style>
+    <div class="container text-light py-5">
+        
+        <h3>Bienvenido</h3>
+        <h3 id="NomUsu"></h3>
+        <script>
+            window.onload = function() {
+              var nombreEstudiante = sessionStorage.getItem('nombreEstudiante');
+             
+              var nombreUsuario = nombreEstudiante;
+              let titulo1 = document.getElementById("NomUsu");
+              
+            };
+        </script>
+        <button class="btn btn-primary w-30" onclick="logout()">Cerrar Sesión</button>
+        
+
+        
+        <div class="row">
+            
+            <div class="col-4 p-5">
+                <div class="SubirArchivo">
+                    <form class="form" onsubmit="Upload(event)">
+                        <input type="file" class="carga mt-3 "id="file" name="file" accept=".pdf,.txt,image/*">
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary w-100" id="CarArchivo">Cargar Archivo</button>
+                        </div>
+                    </form>
+        
+                </div>
+                <form class="form" onsubmit="CREATE(event)">
+                    <input type="text" id="folderName" name="folderName" class="form-control mt-3" placeholder="Nombre de Carpeta">
+                    <div class="form-group mt-8">
+                        <button type="submit" class="btn btn-primary w-100">      Crear Carpeta      </button>
+                    </div>
+                </form>
+                <button class="btn btn-primary w-100" onclick="RENAME()">Modificar Carpeta</button>
+                <button class="btn btn-primary w-100" onclick="DELETE()">Eliminar Carpeta</button>
+                <a onclick="showGraph()" class="btn btn-primary w-100 mt-3">Reporte de carpetas</a>
+                <a onclick="Compartir()" class="btn btn-primary w-100 mt-3">Compartidos</a>
+                <a onclick="Chat()" class="btn btn-primary w-100 mt-3">CHAT</a>
+
+
+            </div>
+            <div class="col-8 p-5">
+                <div class="row">
+                    <div class="col-2">
+                    </div>
+                    <div class="col-6">
+                        <input type="text" id="path" name="path"  class="form-control" value="/" />
+                    </div>
+                    <div class="col-4">
+                        <button type="button" onclick="RETURN()" class="btn-buscar w-50">Inicio</button>    
+                    </div>
+                </div>
+                <div class="row mt-4" id="carpetas">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-8 p-6">
+            <button id="Permisos" onclick="showOptions()">PERMISOS</button>
+            <label for="CBPermisos" id="label1" style="display:none">Permisos de lectura</label>
+            <select id="CBPermisos"  class="BotPER"  style="display:none">
+              <option value="boton3" selected></option>
+              <option value="R" >R</option>
+              <option value="R-W">R-W</option>
+            </select>
+            <label for="CBCarnet" id="label2" style="display:none">Carnet</label>
+            <select id="CBCarnet" class="BotPER" style="display:none">
+
+            </select>
+            
+            <script>
+                // Obtener los carnets almacenados en localStorage
+                var data = JSON.parse(localStorage.getItem("studentsData")) || [];
+                var combobox = document.getElementById("CBCarnet");
+                data.forEach(function(item) {
+                  var option = document.createElement("option");
+                  option.value = item.carnet;
+                  option.text = item.carnet;
+                  combobox.appendChild(option);
+                });
+  
+              </script>
+              <label for="CBArchivo" id="label3" style="display:none">Archivo</label>
+              <select id="CBArchivo" class="BotPER" style="display:none"></select>
+              <button class="btnPer" id="BtnPer" onclick="SendPermission()" style="display:none">Aceptar</button>
+                </div>
+        </div>
+
+        <div class="ROW">
+            <h1>Reporte de Carpetas</h1>
+            <img id="graph">
+        </div>
+
+
+    </div>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+    crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" 
+    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" 
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" 
+    integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" 
+    crossorigin="anonymous"></script>
+    <!-- Importar Estructuras -->
+    <script src="./js/lib/cycle.js"></script>
+   
+    <script src="./js/ESTRUCTURAS/n-ary-tree.js"></script>
+    <script src="./js/ESTRUCTURAS/BIT.js"></script>
+    <!-- Importar Archivo Principal -->
+    <script src="./js/Method.js"></script>
+    <!-- Importar Graficador -->
+</body>
+</html>
