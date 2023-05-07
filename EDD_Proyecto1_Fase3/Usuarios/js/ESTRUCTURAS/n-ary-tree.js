@@ -90,7 +90,7 @@ class Tree{
       if (file.type==="text/plain") {
         code += `<div class="col-2 folder">
         <div class="link-like" onclick="downloadTxt('${file.name}', '${file.content}')">
-          <img src="./txt-icon.png" width="100%"/>
+          <img src="./imgs/txt-icon.png" width="100%"/>
           <p class="h6 text-center">${file.name}</p>
         </div>
       </div>`;
@@ -98,7 +98,7 @@ class Tree{
       else {
       code += `<div class="col-2 folder">
                     <a href="${file.content}" download="${file.name}" class="link-like">
-                      <img src="./txt-icon.png" width="100%"/>
+                      <img src="./imgs/txt-icon.png" width="100%"/>
                       <p class="h6 text-center">${file.name}</p>
                     </a>
                   </div>`;
